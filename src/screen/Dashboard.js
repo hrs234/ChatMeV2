@@ -1,6 +1,6 @@
 
 import React, { Fragment, Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableHighlight, Button, Image, TouchableOpacity  } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableHighlight, Button, Image, TouchableOpacity, StatusBar, ActivityIndicator } from 'react-native';
 import { Container, Form, Item, Input, Label, Content } from 'native-base';
 import MapView, { PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import Modal from "react-native-modal";
@@ -35,7 +35,8 @@ class Dashboard extends Component {
             isModalVisible: false,
             isDisabled: false,
             swipeToClose: true,
-            sliderValue: 0.3
+            sliderValue: 0.3,
+            process: true
         }
     }
 
@@ -46,6 +47,7 @@ class Dashboard extends Component {
 
     componentDidMount()
     {
+        StatusBar.setHidden(true);
         this._maps();
     }
 
@@ -54,7 +56,8 @@ class Dashboard extends Component {
             this.setState({
                 latitude: posistion.coords.latitude,
                 longitude: posistion.coords.longitude,
-                error: null
+                error: null,
+                process: false
             })
         }, error => this.setState({ error: error.message }),
             {
@@ -72,6 +75,10 @@ class Dashboard extends Component {
         const pinColor = '#000000';
 
         return (
+            this.state.process
+            ?
+                <ActivityIndicator style={{ marginTop: 150 }} />
+            :
             <Fragment>
                 {/* <Container style={styles.container}>
                     <Text style={{ fontSize: 50, color: "#d4d6d9" }}>Maps</Text>
@@ -89,8 +96,8 @@ class Dashboard extends Component {
                     initialRegion={{
                         latitude: this.state.latitude,
                         longitude: this.state.longitude,
-                        latitudeDelta: 1.1000,
-                        longitudeDelta: 1.1000
+                        latitudeDelta: 0.1000,
+                        longitudeDelta: 0.1000
                     }}
                 >
                     {this.state.markers.map(marker => (

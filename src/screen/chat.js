@@ -100,7 +100,7 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <View style={{ backgroundColor: "#fff" }}>
+                <View style={{ backgroundColor: "#fff", flex: 1 }}>
                     <Text style={{ marginTop: 20, marginLeft: 20, marginBottom: 15, fontSize: 50, color: "#d4d6d9" }} >Chats</Text>
                     {/* <SafeAreaView> */}
                         <FlatList 

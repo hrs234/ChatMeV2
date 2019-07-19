@@ -1,18 +1,47 @@
 import React, { Fragment, Component } from 'react';
-import { View, Text, StyleSheet, TextInput, AsyncStorage, TouchableOpacity, Image} from 'react-native';
+import { View, Text, StyleSheet, TextInput, AsyncStorage, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
 import { Container, Form, Item, Input, Label, Button, Content } from 'native-base';
 import user from './User';
 import firebase from 'firebase';
 
 export default class App extends Component {
 
-    
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            phone: '',
+            number: '',
+            errorMessage: '',
+            load: true,
+            latitude: '',
+            longitude: ''
+        }
 
-    state = ({
-        phone: '',
-        number: '',
-        errorMessage: ''
-    })
+        this._getLocation();
+    }
+
+    // state = ({
+        
+    // })
+
+    _getLocation = () =>
+    {
+        navigator.geolocation.getCurrentPosition(posistion => {
+            this.setState({
+                latitude: posistion.coords.latitude,
+                longitude: posistion.coords.longitude,
+                error: null,
+                load: false
+            })
+
+            alert('Location Captured');
+
+        }, error => this.setState({ error: error.message }),
+            {
+                enableHighAccuracy: true, timeout: 600000, maximumAge: 600000
+            })
+    }
 
     handleChange = key => val => {
         this.setState({ [key]: val });
@@ -37,13 +66,36 @@ export default class App extends Component {
         }
     }
 
+    updateLocation = (uid) => 
+    {
+            let updates = {};
+            
+            let containt = {
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude
+            };
+
+            updates['users/' + uid + '/location'] = containt;
+            firebase.database().ref().update(updates).then( () => {
+                alert('location updated');
+
+                
+
+            }).catch( error => {
+                alert('failed updating location : \n Reason: '+error.message);
+            });
+    }
+
     _saveLogin =  (uid) => 
     {
         alert('Hello, ' + this.state.phone);
 
+        this.updateLocation(uid);
         this._saveSession(uid);
         
         user.phone = uid;
+        user.location.longitude = this.state.longitude;
+        user.location.latitude = this.state.latitude;
         
         // firebase.database().ref("users/" + uid).set({ name: this.state.phone })
         
@@ -55,12 +107,18 @@ export default class App extends Component {
         alert('saved in asyncstorage');
 
         await AsyncStorage.setItem('userPhone', UID);
+
+
         
     }
 
     render()
     {
         return (
+            this.state.load 
+            ?
+                <ActivityIndicator style={{ marginTop: 150 }} />
+            :
             <Fragment>
                 <Container style={styles.container}>
                     <Text style={{ fontSize: 50, color: "#d4d6d9" }}>Login</Text>

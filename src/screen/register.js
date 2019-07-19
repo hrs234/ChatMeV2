@@ -1,6 +1,6 @@
 
 import React, { Fragment, Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, AsyncStorage, ActivityIndicator } from 'react-native';
 import { Container, Form, Item, Input, Label, Button, Content } from 'native-base';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -10,14 +10,29 @@ import user from './User';
 
 class App extends Component {
 
-    state = {
-        email: '',
-        password: '',
-        errorMessage: '',
-        name: '',
-        img: ''
+    constructor(props)
+    {
+        super(props);
 
+        // get the current location
+        this._maps();
+
+        this.state = {
+            email: '',
+            password: '',
+            errorMessage: '',
+            name: '',
+            img: '',
+            latitude: '',
+            longitude: '',
+            process: true
+        }
     }
+
+    // state = {
+        
+
+    // }
 
     // when user press register button
     _handleRegister = () =>
@@ -42,6 +57,38 @@ class App extends Component {
             ).catch(error => this.setState({ errorMessage: error.message }))
         }
 
+        
+
+    }
+
+    _maps = () => {
+        navigator.geolocation.getCurrentPosition(posistion => {
+            
+            // set the object of state
+            // this.state.latitude = posistion.coords.latitude;
+
+            this.setState({ latitude: posistion.coords.latitude });
+
+            // this.state.longitude = posistion.coords.longitude;
+
+            this.setState({ longitude: posistion.coords.longitude });
+
+
+            // this.state.process = false;
+
+            
+            if(this.state.latitude != '' && this.state.longitude != '')
+            {
+                this.setState({ process: false });
+                alert('Location Captured \n latitude: '+this.state.latitude+'\n lonngitude: '+this.state.longitude);
+            }
+
+
+
+        }, error => this.setState({ error: error.message }),
+            {
+                enableHighAccuracy: true, timeout: 600000, maximumAge: 600000
+            })
     }
 
     // when user is successfully registered
@@ -60,11 +107,25 @@ class App extends Component {
         // adding full information
         // await AsyncStorage.setItem('number')
         
-        
+        // set up the current user profile
+
+        console.warn(this.state);
+
         user.phone = uid;
+        user.location.longitude = this.state.longitude;
+        user.location.latitude = this.state.latitude;
         
         // POST to the database
-        firebase.database().ref("users/" + uid).set({ name: this.state.name, img: this.state.img, email: this.state.email});
+        firebase.database().ref("users/" + uid).set(
+            { 
+                name: this.state.name, 
+                img: this.state.img, 
+                email: this.state.email, 
+                location:{
+                    longitude: this.state.longitude,
+                    latitude: this.state.latitude
+                }
+            });
         
         // mavigate to another screen
         
@@ -100,6 +161,11 @@ class App extends Component {
 
     render() {
         return (
+
+            this.state.process 
+            ? 
+            <ActivityIndicator style={{ marginTop: 250 }} />
+            :
             <Fragment >
 
                 <Content >

@@ -49,15 +49,23 @@ export default class ChatScreen extends Component
 
     componentWillMount()
     {
-        console.warn('[ChatScreen.js State: ]'+JSON.stringify(this.state.person));
+        console.warn('[ChatScreen.js State: ]' + JSON.stringify(this.state.person));
 
-        firebase.database().ref("messages").child(user.phone).child(this.state.person.number).on('child_added', (value)=>{
-            this.setState((prevState)=> {return{
-                messageList: [...prevState.messageList, value.val()]
-            }})
+        firebase.database().ref("messages").child(user.phone).child(this.state.person.number).on('child_added', (value) => {
+            this.setState((prevState) => {
+                return {
+                    messageList: [...prevState.messageList, value.val()]
+                }
+            })
         })
     }
 
+    // componentWillUpdate()
+    // {
+    //     this._loadChat();
+    // }
+
+    
     _handleChanges = key => value =>
     {
         this.setState({ [key]:value });
