@@ -57,7 +57,7 @@ export default class AuthLoadingScreen extends React.Component {
     render() {
         return (
             <View>
-                <ActivityIndicator />
+                <ActivityIndicator style={{ marginTop: 150 }}/>
                 <StatusBar barStyle="default" />
             </View>
         );

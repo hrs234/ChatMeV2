@@ -83,7 +83,7 @@ class App extends Component {
 
     renderRow = ({ item }) =>{
         return(
-            <TouchableOpacity style={{ padding: 10}} onPress={() => this.props.navigation.navigate('Chat', item)}>
+            <TouchableOpacity style={{ padding: 10 }} onPress={() => this.props.navigation.navigate('FriendProfile', item)}>
                 <View style={{ backgroundColor: "#fff", borderBottomColor: "#fff", borderTopColor: "#fff", padding: 15, borderWidth: 0, flexDirection: "row" }}>
                     <Image
                     style={{ width: 50, height: 50, marginRight: 23 }}
@@ -101,7 +101,7 @@ class App extends Component {
         return (
             <Fragment>
                 <View style={{ backgroundColor: "#fff" }}>
-                    <Text style={{ marginTop: 20, marginLeft: 20, marginBottom: 15, fontSize: 50, color: "#d4d6d9" }} >Chats</Text>
+                    <Text style={{ marginTop: 20, marginLeft: 20, marginBottom: 15, fontSize: 50, color: "#d4d6d9" }} >Friends</Text>
                     {/* <SafeAreaView> */}
                         <FlatList 
                         data={this.state.users}

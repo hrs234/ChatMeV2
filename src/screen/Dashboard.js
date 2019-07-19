@@ -1,8 +1,11 @@
 
 import React, { Fragment, Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Dimensions, Modal, TouchableHighlight } from 'react-native';
-import { Container, Form, Item, Input, Label, Button, Content } from 'native-base';
+import { View, Text, StyleSheet, TextInput, TouchableHighlight, Button, Image, TouchableOpacity  } from 'react-native';
+import { Container, Form, Item, Input, Label, Content } from 'native-base';
 import MapView, { PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import Modal from "react-native-modal";
+
+
 
 class Dashboard extends Component {
     
@@ -28,6 +31,11 @@ class Dashboard extends Component {
                     },  
                 }],
             modalVisible: false,
+            isOpen: false,
+            isModalVisible: false,
+            isDisabled: false,
+            swipeToClose: true,
+            sliderValue: 0.3
         }
     }
 
@@ -54,16 +62,13 @@ class Dashboard extends Component {
             })
     }
 
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
-    }
-
-    _Modal = () => {
-        
-    }
+    toggleModal = () => {
+        this.setState({ isModalVisible: !this.state.isModalVisible });
+    };
     
     render() {
         
+
         const pinColor = '#000000';
 
         return (
@@ -94,30 +99,34 @@ class Dashboard extends Component {
                             title={marker.title}
                         />
                     ))}
-                    <Marker coordinate={this.state} pinColor={pinColor} title="You" onPress={() => this.setModalVisible(true)} />
+                    <Marker coordinate={this.state} pinColor={pinColor} title="You" onPress={this.toggleModal} />
                 </MapView>
 
                 {/* modal here */}
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                    }}>
-                    <View style={{ marginTop: 22 }}>
-                        <View style={{ display: "flex", justifyContent: "center", flex: 1 }}>
-                            <Text>Hello World!</Text>
+                <View>
+                    <Modal isVisible={this.state.isModalVisible}>
+                        <View style={{ flex: 1, backgroundColor: "#fff", height: 150, justifyContent: "center", flexDirection: "column" }}>
+                            <Image source={{ uri: `https://avatars0.githubusercontent.com/u/38139389?v=4` }} style={{ width: 150, height: 150, borderRadius: 150, marginBottom: 15, marginTop: 25, alignSelf: "center" }} />
+                            <Text style={{ textAlign: "center", marginTop: 25, marginBottom: 25, fontSize: 25 }}>Name Here</Text>
+                            <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 40 }}>
+                                
+                                <TouchableOpacity onPress={() => {alert('this chat')}}>
+                                <Image source={require('../images/038-chat.png')} style={{ width: 50, height: 50, marginRight: 40 }} />
+                                </TouchableOpacity>
+                                
+                                <TouchableOpacity onPress={() => { alert('this profile') }}>
+                                <Image source={require('../images/002-person.png')} style={{ width: 50, height: 50}} />
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity onPress={this.toggleModal}>
+                                <Text style={{ color: "#ff9696", textAlign: "center"}} >Close</Text>
+                            </TouchableOpacity>
 
-                            <TouchableHighlight
-                                onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible);
-                                }}>
-                                <Text>Hide Modal</Text>
-                            </TouchableHighlight>
+                            {/* <Button title="Close" onPress={this.toggleModal} style={{ width: 150 }} /> */}
+                            
                         </View>
-                    </View>
-                </Modal>
+                    </Modal>
+                </View>
 
             </Fragment>
         );
@@ -138,7 +147,8 @@ const styles = StyleSheet.create({
     },
     text: {
         width: "200"
-    }
+    },
+   
 });
 
 export default Dashboard;

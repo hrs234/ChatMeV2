@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, SafeAreaView, TextInput, TouchableOpacity, FlatList, Dimensions} from 'react-native';
+import {Text, View, SafeAreaView, TextInput, TouchableOpacity, FlatList, Dimensions, Image} from 'react-native';
 
 import firebase from 'firebase';
 import user from './User';
@@ -21,13 +21,31 @@ export default class ChatScreen extends Component
             textMessage: '',
             messageList: []
         }
+
     }
 
+    // static navigationOptions = ({ navigation }) => {
+    //     return{
+    //         title: 'list Chats',
+    //         headerRight: (
+    //             <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+    //                 <Image style={{ width: 32, height: 32, marginRight: 15 }} source={require('../images/maintain.jpg')} />
+    //             </TouchableOpacity>)
+    //     }
+    // }
+
+    
+
     static navigationOptions = ({ navigation }) => {
+        
+        
+        
         return{
-            title: navigation.getParam('name', null)
+            title: navigation.getParam('name', null),
+            
         }
     }
+
 
     componentWillMount()
     {
@@ -75,7 +93,7 @@ export default class ChatScreen extends Component
 
     renderRow = ({item}) => {
         return(
-            <View style={{flexDirection: "row", width: '68%',alignSelf: item.from===user.phone ? 'flex-end' : 'flex-start',backgroundColor: item.from===user.phone ? "#00897b" : "#7cb342",borderRadius: 5,marginBottom: 10}}>
+            <View style={{ flexDirection: "row", width: '68%', padding: 10, alignSelf: item.from === user.phone ? 'flex-end' : 'flex-start', backgroundColor: item.from === user.phone ? "#81aef7" : "#cad5e8",borderBottomLeftRadius: 12,borderTopRightRadius: 12,marginBottom: 10}}>
                 <Text style={{color: '#fff', padding: 7, fontSize: 16}}>
                     {item.message}
                 </Text>
@@ -106,22 +124,25 @@ export default class ChatScreen extends Component
     {
         let {height, width} = Dimensions.get('window');
         return(
-            // <View>
-            <SafeAreaView>
-                {/* <Text>Chat Screen here</Text> */}
+            <View style={{ flex: 1 }}>
+
+                    
                 <FlatList 
                 data={this.state.messageList} 
                 renderItem={this.renderRow}
                 keyExtractor={(item, index) => index.toString()}
-                style={{ padding: 10, height: height * 0.8}} />
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <TextInput onChangeText={this._handleChanges('textMessage')} style={{ borderWidth: 0.8, borderColor: "#000", width: "80%" }} placeholder="Type Message Here..." value={this.state.textMessage} />
-                    <TouchableOpacity onPress={this.sendMessage}>
-                        <Text style={{ margin: 12 }}>Send</Text>
-                    </TouchableOpacity>
-                </View>
+                    style={{ padding: 10, height: height * 0.8, marginBottom: 15}} 
+                    initialScrollIndex={-1}/>
+            <SafeAreaView>
+                    <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#a1c3ff" }}>
+                        <TextInput onChangeText={this._handleChanges('textMessage')} style={{ width: "80%", padding: 13, backgroundColor: "#b8d1fc" }} placeholder="Type Message Here..." value={this.state.textMessage} />
+                        <TouchableOpacity onPress={this.sendMessage}>
+                            {/* <Text style={{ margin: 12 }}>Send</Text> */}
+                            <Image source={require('../images/024-paperplane.png')} style={{ width: 30, height: 30, marginLeft: 20 }} />
+                        </TouchableOpacity>
+                    </View>        
             </SafeAreaView>
-            // </View>
+            </View>
         )
     }
 }

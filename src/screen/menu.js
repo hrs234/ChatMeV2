@@ -1,6 +1,6 @@
 
 import React, { Fragment, Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage, Image, ScrollView } from 'react-native';
 import { Container, Form, Item, Input, Label, Button, Content } from 'native-base';
 import firebase from '../config/firebase';
 import user from '../screen/User';
@@ -55,20 +55,27 @@ class menu extends Component {
                     {/* <TouchableHighlight onPress={() => this.props.navigation.navigate('Register')}>
                         <Text style={{ fontSize: 50, color: "#d4d6d9" }}>Register</Text>
                     </TouchableHighlight> */}
-                        <Image source={require('../images/035-location.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10, marginTop: 20 }} />
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Maps')}>
-                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Maps</Text>
-                        </TouchableOpacity>
-                    
-                        <Image source={require('../images/038-chat.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ListChat')}>
-                        <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Chats</Text>
-                        </TouchableOpacity>
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            <Image source={require('../images/035-location.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10, marginTop: 20 }} />
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Maps')}>
+                                <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Maps</Text>
+                            </TouchableOpacity>
+                        
+                            <Image source={require('../images/038-chat.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ListChat')}>
+                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Chats</Text>
+                            </TouchableOpacity>
 
-                        <Image source={require('../images/003-person.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
-                        <TouchableOpacity>
-                        <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} onPress={() => this.props.navigation.navigate('Profile')}>Profile</Text>
-                        </TouchableOpacity>
+                            <Image source={require('../images/003-person.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
+                            <TouchableOpacity>
+                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} onPress={() => this.props.navigation.navigate('Profile')}>Profile</Text>
+                            </TouchableOpacity>
+
+                            <Image source={require('../images/007-group.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
+                            <TouchableOpacity>
+                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} onPress={() => this.props.navigation.navigate('ListFriend')}>Friends</Text>
+                            </TouchableOpacity>
+                        </ScrollView>
                     
 
                 </Container>
