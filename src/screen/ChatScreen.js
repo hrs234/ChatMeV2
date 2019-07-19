@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, SafeAreaView, TextInput, TouchableOpacity, FlatList, Dimensions, Image} from 'react-native';
+import {ActivityIndicator, Text, View, SafeAreaView, TextInput, TouchableOpacity, FlatList, Dimensions, Image} from 'react-native';
 
 import firebase from 'firebase';
 import user from './User';
@@ -19,8 +19,11 @@ export default class ChatScreen extends Component
                 number: props.navigation.getParam('phone')
             },
             textMessage: '',
-            messageList: []
+            messageList: [],
+            loading: true
         }
+
+        
 
     }
 
@@ -47,18 +50,25 @@ export default class ChatScreen extends Component
     }
 
 
-    componentWillMount()
-    {
-        console.warn('[ChatScreen.js State: ]' + JSON.stringify(this.state.person));
+    
+    
 
+    componentDidMount()
+    {
         firebase.database().ref("messages").child(user.phone).child(this.state.person.number).on('child_added', (value) => {
             this.setState((prevState) => {
                 return {
-                    messageList: [...prevState.messageList, value.val()]
+                    messageList: [...prevState.messageList, value.val()],
+                    loading: false
                 }
             })
+
         })
     }
+    
+    
+
+    
 
     // componentWillUpdate()
     // {
@@ -101,6 +111,7 @@ export default class ChatScreen extends Component
 
     renderRow = ({item}) => {
         return(
+            
             <View style={{ flexDirection: "row", width: '68%', padding: 10, alignSelf: item.from === user.phone ? 'flex-end' : 'flex-start', backgroundColor: item.from === user.phone ? "#81aef7" : "#cad5e8",borderBottomLeftRadius: 12,borderTopRightRadius: 12,marginBottom: 10}}>
                 <Text style={{color: '#fff', padding: 7, fontSize: 16}}>
                     {item.message}
@@ -132,6 +143,10 @@ export default class ChatScreen extends Component
     {
         let {height, width} = Dimensions.get('window');
         return(
+            this.state.loading
+            ?
+            <ActivityIndicator style={{ marginTop: 250 }} />
+            :
             <View style={{ flex: 1 }}>
 
                     
@@ -140,8 +155,8 @@ export default class ChatScreen extends Component
                 renderItem={this.renderRow}
                 keyExtractor={(item, index) => index.toString()}
                     style={{ padding: 10, height: height * 0.8, marginBottom: 15}} 
-                    initialScrollIndex={-1}/>
-            <SafeAreaView>
+                    />
+                    <SafeAreaView>
                     <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#a1c3ff" }}>
                         <TextInput onChangeText={this._handleChanges('textMessage')} style={{ width: "80%", padding: 13, backgroundColor: "#b8d1fc" }} placeholder="Type Message Here..." value={this.state.textMessage} />
                         <TouchableOpacity onPress={this.sendMessage}>
@@ -149,7 +164,7 @@ export default class ChatScreen extends Component
                             <Image source={require('../images/024-paperplane.png')} style={{ width: 30, height: 30, marginLeft: 20 }} />
                         </TouchableOpacity>
                     </View>        
-            </SafeAreaView>
+                    </SafeAreaView>
             </View>
         )
     }

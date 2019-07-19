@@ -81,6 +81,7 @@ class Dashboard extends Component {
                 maximumAge: 1000
             }
         )
+        
         this.watchID = navigator.geolocation.watchPosition(
             position => {
                 this.setState({
@@ -92,6 +93,8 @@ class Dashboard extends Component {
                 })
             }
         )
+
+        
     }
     
 
@@ -111,6 +114,10 @@ class Dashboard extends Component {
         }
         
     };
+
+    _handlechat = () =>{
+        this.toggleModal(null, false);
+    }
     
     render() {
         
@@ -167,15 +174,16 @@ class Dashboard extends Component {
                 <View>
                     <Modal isVisible={this.state.isModalVisible}>
                         <View style={{ flex: 1, backgroundColor: "#fff", height: 150, justifyContent: "center", flexDirection: "column" }}>
-                            <Image source={{ uri: `https://avatars0.githubusercontent.com/u/38139389?v=4` }} style={{ width: 150, height: 150, borderRadius: 150, marginBottom: 15, marginTop: 25, alignSelf: "center" }} />
+                            <Image source={{ uri: `${this.state.currentClick.img}` }} style={{ width: 150, height: 150, borderRadius: 150, marginBottom: 15, marginTop: 25, alignSelf: "center" }} />
                             <Text style={{ textAlign: "center", marginTop: 25, marginBottom: 25, fontSize: 25 }}>{this.state.currentClick.name}</Text>
                             <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 40 }}>
                                 
-                                <TouchableOpacity onPress={() => {alert('this chat')}}>
+                                    
+                                    <TouchableOpacity onPress={() => { () => this.setState({ isModalVisible: false }); this.props.navigation.navigate('Chat', { name: this.state.currentClick.name, phone: this.state.currentClick.phone });  }}>
                                 <Image source={require('../images/038-chat.png')} style={{ width: 50, height: 50, marginRight: 40 }} />
                                 </TouchableOpacity>
                                 
-                                <TouchableOpacity onPress={() => { alert('this profile') }}>
+                                    <TouchableOpacity onPress={() => { () => this.setState({ isModalVisible: false }); this.props.navigation.navigate('FriendProfile', { name: this.state.currentClick.name, phone: this.state.currentClick.phone }); }}>
                                 <Image source={require('../images/002-person.png')} style={{ width: 50, height: 50}} />
                                 </TouchableOpacity>
                             </View>

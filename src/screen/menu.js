@@ -1,11 +1,19 @@
 
 import React, { Fragment, Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage, Image, ScrollView, ActivityIndicator } from 'react-native';
 import { Container, Form, Item, Input, Label, Button, Content } from 'native-base';
 import firebase from '../config/firebase';
 import user from '../screen/User';
 
 class menu extends Component {
+
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            loading: true
+        }
+    }
 
     _logout = async () => {
         await AsyncStorage.clear();
@@ -41,6 +49,9 @@ class menu extends Component {
                 user.number = person.number;
                 user.name = person.name;
                 user.email = person.email;
+                user.img = person.img;
+                
+
             }
 
 
@@ -49,6 +60,8 @@ class menu extends Component {
 
     render() {
         return (
+
+            
             <Fragment>
                 
                 <Container style={styles.container}>
@@ -56,24 +69,25 @@ class menu extends Component {
                         <Text style={{ fontSize: 50, color: "#d4d6d9" }}>Register</Text>
                     </TouchableHighlight> */}
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            <Image source={require('../images/035-location.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10, marginTop: 20 }} />
+
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('Maps')}>
-                                <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Maps</Text>
+                            <Image source={require('../images/035-location.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10, marginTop: 20 }} />
+                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Maps</Text>
                             </TouchableOpacity>
                         
-                            <Image source={require('../images/038-chat.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('ListChat')}>
+                            <Image source={require('../images/038-chat.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
                             <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Chats</Text>
                             </TouchableOpacity>
 
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
                             <Image source={require('../images/003-person.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
-                            <TouchableOpacity>
-                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} onPress={() => this.props.navigation.navigate('Profile')}>Profile</Text>
+                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} >Profile</Text>
                             </TouchableOpacity>
 
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ListFriend')}>
                             <Image source={require('../images/007-group.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
-                            <TouchableOpacity>
-                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} onPress={() => this.props.navigation.navigate('ListFriend')}>Friends</Text>
+                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} >Friends</Text>
                             </TouchableOpacity>
                         </ScrollView>
                     

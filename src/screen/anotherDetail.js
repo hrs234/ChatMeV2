@@ -27,7 +27,8 @@ class App extends Component {
 
     myData = {
         email: '',
-        name: ''
+        name: '',
+        img: ''
     }
 
 
@@ -54,6 +55,7 @@ class App extends Component {
                 
                 this.myData.email = person.email;
                 this.myData.name = person.name;
+                this.myData.img = person.img;
 
             }
 
@@ -74,7 +76,7 @@ class App extends Component {
 
                             <Image style={{ width: "100%", height: 250 }} source={require("../images/bg.jpg")} />
                             <Image
-                                    source={{ uri: `https://avatars0.githubusercontent.com/u/38139389?v=4` }}
+                                    source={{ uri: `${this.myData.img}` }}
                                     style={{ width: 150, height: 150, borderRadius: 150, marginTop: -90}}
                                 />
                         <ScrollView>

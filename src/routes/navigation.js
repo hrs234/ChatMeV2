@@ -50,7 +50,10 @@ const AppStack = createStackNavigator(
             
         },
         FriendProfile: {
-            screen: anotherDetail
+            screen: anotherDetail,
+            navigationOptions: {
+                header: null
+            }
         },
         ListFriend:{
             screen: listFriend,

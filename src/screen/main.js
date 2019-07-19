@@ -35,7 +35,6 @@ export default class App extends Component {
                 load: false
             })
 
-            alert('Location Captured');
 
         }, error => this.setState({ error: error.message }),
             {
@@ -76,14 +75,7 @@ export default class App extends Component {
             };
 
             updates['users/' + uid + '/location'] = containt;
-            firebase.database().ref().update(updates).then( () => {
-                alert('location updated');
-
-                
-
-            }).catch( error => {
-                alert('failed updating location : \n Reason: '+error.message);
-            });
+            firebase.database().ref().update(updates);
     }
 
     _saveLogin =  (uid) => 

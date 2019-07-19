@@ -82,7 +82,7 @@ class App extends Component {
 
                             <Image style={{ width: "100%", height: 250 }} source={require("../images/bg.jpg")} />
                             <Image
-                                    source={{ uri: `https://avatars0.githubusercontent.com/u/38139389?v=4` }}
+                                    source={{ uri: `${user.img}` }}
                                     style={{ width: 150, height: 150, borderRadius: 150, marginTop: -90}}
                                 />
                         <ScrollView>

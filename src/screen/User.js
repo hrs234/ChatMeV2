@@ -3,6 +3,7 @@ const user = {
     number: null,
     name: null,
     email: null,
+    img: null,
     location: {
         latitude: null,
         longitude: null
