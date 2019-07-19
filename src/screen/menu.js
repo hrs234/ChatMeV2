@@ -42,7 +42,8 @@ class menu extends Component {
             person.phone = val.key;
 
 
-            if (person.phone === user.phone) {
+            if (person.phone === user.phone) 
+            {
 
                 console.warn(person.name);
 
@@ -64,35 +65,32 @@ class menu extends Component {
             
             <Fragment>
                 
-                <Container style={styles.container}>
-                    {/* <TouchableHighlight onPress={() => this.props.navigation.navigate('Register')}>
-                        <Text style={{ fontSize: 50, color: "#d4d6d9" }}>Register</Text>
-                    </TouchableHighlight> */}
-                        <ScrollView showsVerticalScrollIndicator={false}>
+                <Text style={{ fontSize: 50, marginLeft: 30, marginTop: 30, color: "#d4d6d9" }}>ChatMe</Text>
 
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Maps')}>
-                            <Image source={require('../images/035-location.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10, marginTop: 20 }} />
-                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Maps</Text>
-                            </TouchableOpacity>
+                <View style={styles.container}>
+
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Maps')}>
+                    <Image source={require('../images/035-location.png')} style={{  width: 50, height: 50, padding: 20, margin: 30, alignContent: "center"}} />
+                    <Text style={{ fontSize: 25, color: "#d4d6d9", textAlign: "center" }}>Maps</Text>
+                    </TouchableOpacity>
                         
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ListChat')}>
-                            <Image source={require('../images/038-chat.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
-                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }}>Chats</Text>
-                            </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ListChat')}>
+                    <Image source={require('../images/038-chat.png')} style={{  width: 50, height: 50, padding: 20, margin: 30, alignContent: "center" }} />
+                    <Text style={{ fontSize: 25, color: "#d4d6d9", textAlign: "center" }}>Chats</Text>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
-                            <Image source={require('../images/003-person.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
-                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} >Profile</Text>
-                            </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                    <Image source={require('../images/003-person.png')} style={{  width: 50, height: 50, padding: 20, margin: 30, alignContent: "center"}} />
+                    <Text style={{ fontSize: 25, color: "#d4d6d9", textAlign: "center" }} >MyProfile</Text>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ListFriend')}>
-                            <Image source={require('../images/007-group.png')} style={{ marginBottom: 17, width: 80, height: 80, marginLeft: 10 }} />
-                            <Text style={{ fontSize: 50, color: "#d4d6d9", marginBottom: 50 }} >Friends</Text>
-                            </TouchableOpacity>
-                        </ScrollView>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ListFriend')}>
+                    <Image source={require('../images/007-group.png')} style={{  width: 50, height: 50, padding: 20, margin: 30, alignContent: "center"}} />
+                    <Text style={{ fontSize: 25, color: "#d4d6d9", textAlign: "center" }} >Friends</Text>
+                    </TouchableOpacity>
                     
 
-                </Container>
+                </View>
             </Fragment>
         );
     }
@@ -100,11 +98,9 @@ class menu extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: "100%"
+        flexDirection: 'row',
+        flexWrap: "wrap",
+        padding: 15
     },
     contents: {
         alignSelf: "center",

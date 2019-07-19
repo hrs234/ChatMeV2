@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, Text, View, SafeAreaView, TextInput, TouchableOpacity, FlatList, Dimensions, Image} from 'react-native';
+import { ActivityIndicator, Text, View, SafeAreaView, TextInput, TouchableOpacity, FlatList, Dimensions, Image, ScrollView} from 'react-native';
 
 import firebase from 'firebase';
 import user from './User';
@@ -59,7 +59,6 @@ export default class ChatScreen extends Component
             this.setState((prevState) => {
                 return {
                     messageList: [...prevState.messageList, value.val()],
-                    loading: false
                 }
             })
 
@@ -112,15 +111,15 @@ export default class ChatScreen extends Component
     renderRow = ({item}) => {
         return(
             
-            <View style={{ flexDirection: "row", width: '68%', padding: 10, alignSelf: item.from === user.phone ? 'flex-end' : 'flex-start', backgroundColor: item.from === user.phone ? "#81aef7" : "#cad5e8",borderBottomLeftRadius: 12,borderTopRightRadius: 12,marginBottom: 10}}>
-                <Text style={{color: '#fff', padding: 7, fontSize: 16}}>
-                    {item.message}
-                </Text>
-                <Text style={{ color: "#000", padding: 3, fontSize: 12 }}>
-                    {this.converTime(item.time)}
-                </Text>
-                
-            </View>
+                <View style={{ flexDirection: "row", width: '68%', padding: 10, alignSelf: item.from === user.phone ? 'flex-end' : 'flex-start', backgroundColor: item.from === user.phone ? "#81aef7" : "#cad5e8",borderBottomLeftRadius: 12,borderTopRightRadius: 12,marginBottom: 10}}>
+                    <Text style={{color: '#fff', padding: 7, fontSize: 16}}>
+                        {item.message}
+                    </Text>
+                    <Text style={{ color: "#000", padding: 3, fontSize: 12 }}>
+                        {this.converTime(item.time)}
+                    </Text>
+                    
+                </View>
         )
     }
 
@@ -143,19 +142,23 @@ export default class ChatScreen extends Component
     {
         let {height, width} = Dimensions.get('window');
         return(
-            this.state.loading
-            ?
-            <ActivityIndicator style={{ marginTop: 250 }} />
-            :
+            
             <View style={{ flex: 1 }}>
 
-                    
+                <ScrollView
+                    ref={ref => this.scrollView = ref}
+                    onContentSizeChange={(contentWidth, contentHeight) => {
+                        this.scrollView.scrollToEnd({ animated: true });
+                    }}
+                    style={{ flex: 7, padding: 20, marginBottom: '20%' }}
+                >    
                 <FlatList 
                 data={this.state.messageList} 
                 renderItem={this.renderRow}
                 keyExtractor={(item, index) => index.toString()}
-                    style={{ padding: 10, height: height * 0.8, marginBottom: 15}} 
+                    style={{ padding: 10, height: height * 0.8}} 
                     />
+                </ScrollView>
                     <SafeAreaView>
                     <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#a1c3ff" }}>
                         <TextInput onChangeText={this._handleChanges('textMessage')} style={{ width: "80%", padding: 13, backgroundColor: "#b8d1fc" }} placeholder="Type Message Here..." value={this.state.textMessage} />
@@ -165,6 +168,7 @@ export default class ChatScreen extends Component
                         </TouchableOpacity>
                     </View>        
                     </SafeAreaView>
+                
             </View>
         )
     }

@@ -41,8 +41,11 @@ class Dashboard extends Component {
                 // this is your personal info
                 User.location = {
                     latitude: person.location.latitude,
-                    longitude: person.location.longitude
+                    longitude: person.location.longitude,
+
                 }
+
+
             }
             else {
                 // inserting to the state as other user
