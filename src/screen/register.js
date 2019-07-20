@@ -80,7 +80,7 @@ class App extends Component {
             if(this.state.latitude != '' && this.state.longitude != '')
             {
                 this.setState({ process: false });
-                alert('Location Captured \n latitude: '+this.state.latitude+'\n lonngitude: '+this.state.longitude);
+                // alert('Location Captured \n latitude: '+this.state.latitude+'\n lonngitude: '+this.state.longitude);
             }
 
 
@@ -156,7 +156,6 @@ class App extends Component {
 
         await AsyncStorage.setItem('userPhone', item);
 
-        alert("saved in asyncstorage");
     }
 
     render() {

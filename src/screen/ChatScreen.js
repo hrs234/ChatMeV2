@@ -145,20 +145,14 @@ export default class ChatScreen extends Component
             
             <View style={{ flex: 1 }}>
 
-                <ScrollView
-                    ref={ref => this.scrollView = ref}
-                    onContentSizeChange={(contentWidth, contentHeight) => {
-                        this.scrollView.scrollToEnd({ animated: true });
-                    }}
-                    style={{ flex: 7, padding: 20, marginBottom: '20%' }}
-                >    
+                    
                 <FlatList 
                 data={this.state.messageList} 
                 renderItem={this.renderRow}
+
                 keyExtractor={(item, index) => index.toString()}
-                    style={{ padding: 10, height: height * 0.8}} 
+                    style={{ padding: 10, height: height * 0.8, marginBottom: 25}} 
                     />
-                </ScrollView>
                     <SafeAreaView>
                     <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#a1c3ff" }}>
                         <TextInput onChangeText={this._handleChanges('textMessage')} style={{ width: "80%", padding: 13, backgroundColor: "#b8d1fc" }} placeholder="Type Message Here..." value={this.state.textMessage} />

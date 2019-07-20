@@ -96,7 +96,6 @@ export default class App extends Component {
     
     _saveSession = async (UID) =>
     {
-        alert('saved in asyncstorage');
 
         await AsyncStorage.setItem('userPhone', UID);
 
