@@ -11,11 +11,12 @@ ChatMe is Chatting application with maps to track our friends where is located
 
 ## Features
 
-<img src="src/images/038-chat.png" alt="X" width="80" />Chatting
-
-
-
-<img src="src/images/035-location.png" width="80">TrackFriends (beta)
+<table border=0>
+  <tr>
+     <td align="center"><img src="src/images/038-chat.png" width="100px;" alt="X"/><br /><sub><b>Chatting</b></sub><br />
+     <td align="center"><img src="src/images/035-location.png" width="100px;" alt="X"/><br /><sub><b>TrackFriends (beta)</b></sub><br />
+  </tr>
+</table>
 
 ## Preview
 
@@ -27,7 +28,7 @@ ChatMe is Chatting application with maps to track our friends where is located
   
         - Node.js
         - React Native (cli version)
-  
+    - make sure your devices is Android
     - then setup our API key
 
         - ## Firebase
@@ -65,12 +66,16 @@ ChatMe is Chatting application with maps to track our friends where is located
             </application>
             ```
             <small>NOTES: only edit the YOUR_API_KEY</small>
+    - connect your phone with USB 
+    - make sure your phone settings of USB debugging is activated
+    - after that open your terminal and type `react-native run-android`
+    - and the application is opened in your phone
   
   - ## Release
 
     - make sure your devices is Android  
     - Open settings in your phone
-    - find the settings in your phone named `install unknown apps` and allow it
+    - make sure `install unknown apps` is allowed
     - download the application here
     - open in your downloads folder of your phone named `ChatMe-beta.apk` and touch it
     - touch `install` and wait until done
