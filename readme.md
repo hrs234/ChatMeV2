@@ -47,8 +47,8 @@ ChatMe is Chatting application with maps to track our friends where is located
   
     - install this requirements first
   
-        - Node.js
-        - React Native (cli version)
+        - [Node.js](https://nodejs.org/en/, "download links")
+        - [React Native (cli version)](https://facebook.github.io/react-native/docs/getting-started, "How to and installation")
     - make sure your devices is Android
     - then setup our API key
 
@@ -96,13 +96,13 @@ ChatMe is Chatting application with maps to track our friends where is located
 
     - make sure your devices is Android  
     - Open settings in your phone
-    - make sure `install unknown apps` is allowed
+    - make sure [`install unknown apps`](https://www.applivery.com/docs/troubleshooting/android-unknown-sources/ "How to") is allowed
     - download the application [here](https://drive.google.com/file/d/174AR-yVumfxvAbm3t9ADUKkMztb7hBB0/view?usp=sharing "download the Application")
     - open in your downloads folder of your phone named `ChatMe-beta.apk` and touch it
     - touch `install` and wait until done
     - voila! the application installed
 
     <small>NOTES:  If you have prompted google play protect during installation process touch the `install anyway`</small>
-## Resource
+## Resource Credits
 
 - <div>Icons made by <a href="https://www.freepik.com/?__hstc=57440181.0f99c0d8527866a47e1ccd8edf6983aa.1563453172319.1563453172319.1563453172319.1&__hssc=57440181.4.1563453172320&__hsfp=3453667035" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
