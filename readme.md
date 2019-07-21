@@ -20,6 +20,27 @@ ChatMe is Chatting application with maps to track our friends where is located
 
 ## Preview
 
+<p align='center'>
+<span>
+<tr>
+  <td><img src="screenshots/login.jpg" width="100px;" alt="X"/></td>
+  <td><img src="screenshots/register.jpg" width="100px;" alt="X"/></td>
+</tr>
+<tr>
+  <td><img src="screenshots/main_menu.jpg" width="100px;" alt="X"/></td>
+  <td><img src="screenshots/chat_list.jpg" width="100px;" alt="X"/></td>
+</tr>
+<tr>
+  <td><img src="screenshots/chat.jpg" width="100px;" alt="X"/></td>
+  <td><img src="screenshots/maps.jpg" width="100px;" alt="X"/></td>
+</tr>
+<tr>
+  <td><img src="screenshots/modal.jpg" width="100px;" alt="X"/></td>
+  <td><img src="screenshots/my_profile.jpg" width="100px;" alt="X"/></td>
+</tr>
+</span>
+</p>
+
 ## Installation
 
   - ## Development
@@ -76,7 +97,7 @@ ChatMe is Chatting application with maps to track our friends where is located
     - make sure your devices is Android  
     - Open settings in your phone
     - make sure `install unknown apps` is allowed
-    - download the application here
+    - download the application [here](https://drive.google.com/file/d/174AR-yVumfxvAbm3t9ADUKkMztb7hBB0/view?usp=sharing "download the Application")
     - open in your downloads folder of your phone named `ChatMe-beta.apk` and touch it
     - touch `install` and wait until done
     - voila! the application installed
