@@ -2,14 +2,15 @@ import firebase from 'firebase';
 
 const config = {
 
-    apiKey: "AIzaSyB1Mf_zMhS8ElEWZs4k8mTMiNihwGo0ul8",
-    authDomain: "chatme-ef3cd.firebaseapp.com",
-    databaseURL: "https://chatme-ef3cd.firebaseio.com",
-    projectId: "chatme-ef3cd",
+    apiKey: "YOUR_API_KEYS",
+    authDomain: "YOUR_DOMAINS",
+    databaseURL: "YOUR_DATABASE_URLs",
+    projectId: "YOUR_PROJECT_ID",
     storageBucket: "",
-    messagingSenderId: "238480690388",
-    appId: "1:238480690388:web:6491887ed1baed71"
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
 
+    
 }
 
 const Firebase = firebase.initializeApp(config);
